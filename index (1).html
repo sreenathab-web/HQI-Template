@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HQI Templates</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background:#F2F4F8; padding:0; }
+
+/* Watermark */
+body::before {
+  content:"OPENDOOR";
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  font-size:140px;
+  font-weight:bold;
+  color:#00008B;
+  z-index:0;
+  pointer-events:none;
+  user-select:none;
+  white-space:nowrap;
+  opacity:0.25;
+}
+
+/* Navbar */
+.navbar {
+  background:#007BFF;
+  padding:12px 20px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.navbar a {
+  color:white;
+  text-decoration:none;
+  font-weight:500;
+  padding:6px 12px;
+  border-radius:6px;
+  transition:background 0.2s;
+}
+.navbar a:hover { background: rgba(255,255,255,0.2); }
+
+/* Container */
+.container {
+  max-width:1200px;
+  margin:auto;
+  padding:30px 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+  gap:20px;
+  z-index:1;
+  position:relative;
+}
+h1 {
+  grid-column:1 / -1;
+  text-align:center;
+  margin-bottom:30px;
+  font-size:2rem;
+  color:#0D1A26;
+}
+
+/* Template box */
+.template {
+  background:linear-gradient(145deg,#FFFFFF,#E6F0FF);
+  border-radius:12px;
+  padding:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.template:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* Heading row */
+h2 {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:1.2rem;
+  margin-bottom:10px;
+  color:#007BFF;
+  background:#EAF3FF;
+  padding:8px 12px;
+  border-radius:8px;
+}
+h2 span.heading-text {
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  margin-right:10px;
+}
+
+/* Copy button */
+.copy-btn {
+  background:#007BFF;
+  color:white;
+  border:none;
+  padding:6px 12px; 
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:0.9rem;
+  transition:background 0.2s;
+}
+.copy-btn:hover { background:#0056B3; }
+
+/* Content area */
+.content {
+  background:#F7F9FC;
+  padding:10px;
+  border-radius:8px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  font-size:0.9rem;
+  color:#333;
+}
+
+/* Toast (copy feedback) */
+.toast {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#333;
+  color:white;
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:0.85rem;
+  opacity:0.95;
+  z-index:2000;
+  animation: fadeInOut 1.5s forwards;
+}
+@keyframes fadeInOut {
+  0% { opacity:0; transform:translateY(20px); }
+  10% { opacity:1; transform:translateY(0); }
+  90% { opacity:1; }
+  100% { opacity:0; transform:translateY(20px); }
+}
+
+/* Floating emoji */
+.emoji-popup {
+  position:absolute;
+  font-size:1.8rem; 
+  pointer-events:none;
+  opacity:1;
+  animation: float-up 1s forwards;
+  z-index:1500;
+}
+@keyframes float-up {
+  0% { transform:translateY(0) scale(1); opacity:1; }
+  100% { transform:translateY(-60px) scale(1.3); opacity:0; }
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .container { grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:15px; }
+  h2 { font-size:1.05rem; }
+  .copy-btn { font-size:0.8rem; }
+}
+@media(max-width:480px){
+  .container { grid-template-columns:1fr; }
+  h2 { font-size:1rem; }
+  .copy-btn { padding:5px 10px; font-size:0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="#hpmvisit">🏠 HPM Visit</a>
+  <a href="#hpmnotes">🗒️ HPM Notes</a>
+  <a href="#lwo">🛠️ LWO</a>
+  <a href="#vendor">🧹 Vendor</a>
+  <a href="#followup">🔄 Follow-up</a>
+  <a href="#photo">📸 Photo</a>
+  <a href="#noaction">🚫 No Action</a>
+  <a href="#side">💬 Side Notes</a>
+  <a href="#vendornotes">📝 Vendor Notes</a>
+  <a href="#incident">🚨 Incident</a>
+</div>
+
+<div class="container">
+  <h1>HQI & Maintenance Templates</h1>
+
+  <!-- Example Template -->
+  <div class="template" id="hpmvisit">
+    <h2><span class="heading-text">🏠 HPM Visit Template</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip state:
+HPM name:
+Visit created Date:
+Last visit completed on:
+last visit Link:
+Last visit completed by:
+Notes:
+    </div>
+  </div>
+
+  <div class="template" id="hpmnotes">
+    <h2><span class="heading-text">🗒️ HPM VISIT NOTES</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip State:
+DOM:
+No Of Time issue reported:
+Issue:
+    </div>
+  </div>
+
+  <div class="template" id="lwo">
+    <h2><span class="heading-text">🛠️/🧰 LWO Template</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip state:
+Last WO completed related to this issue:
+Photos related to the feedback:
+No Of Time issue reported:
+Notes:
+    </div>
+  </div>
+
+  <div class="template" id="vendor">
+    <h2><span class="heading-text">🧹/🌴/🏊‍♂️ Maintenance Vendor Template</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip State:
+Last Landscaping visit date and if photos related to feedback:
+Last Cleaning visit date and if photos related to feedback:
+Last Pool visit date and if photos related to feedback:
+No of Times Issue reported:
+Notes:
+
+    </div>
+  </div>
+
+  <div class="template" id="followup">
+    <h2><span class="heading-text">🔄⏳ Follow-up / Closing Template</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip State:
+Issue Reported On: [Insert Date]
+Current Status: [Pending / In Progress / Awaiting Vendor / Completed]:
+Follow-Up Action Required:
+    </div>
+  </div>
+
+  <div class="template" id="photo">
+    <h2><span class="heading-text">📸🖼️ Photo Auditing</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip state:
+Notes:
+    </div>
+  </div>
+
+  <div class="template" id="noaction">
+    <h2><span class="heading-text">🚫 No Action Closing Template</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip state:
+Notes:
+    </div>
+  </div>
+
+  <div class="template" id="side">
+    <h2><span class="heading-text">💬 Side Conversation Notes</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip State:
+DOM:
+Last Landscaping /Cleaning/ Pool /visit date and if photos related to feedback:
+No of Times Issue reported:
+Last HPM visit completed on:
+Notes:
+    </div>
+  </div>
+
+  <div class="template" id="vendornotes">
+    <h2><span class="heading-text">📝 Maintenance Vendor notes</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Hello Team, We received feedback from the customer regarding [ISSUE]. Upon checking, you already have a scheduled visit for this property on [DATE]. Kindly review this issue during your visit, and let us know if you need any assistance. Please ensure to upload the relevant photos once the issue is addressed.
+    </div>
+  </div>
+
+  <div class="template" id="incident">
+    <h2><span class="heading-text">🚨 Incident Report Template</span>
+      <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+    </h2>
+    <div class="content">
+Flip State:
+DOM:
+No of Times Issue reported:
+Incident report Link:
+Notes:
+    </div>
+  </div>
+</div>
+
+<script>
+function copyContent(button){
+  const template = button.closest('.template');
+  const contentDiv = template.querySelector('.content');
+  if(!contentDiv) return;
+
+  const text = contentDiv.innerText.trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    // Show "Copied!" feedback on button
+    const originalText = button.innerText;
+    button.innerText = 'Copied ✔️';
+    setTimeout(()=>{ button.innerText = originalText; }, 1500);
+
+    // Floating emoji 🎉
+    const emoji = document.createElement('span');
+    emoji.className = 'emoji-popup';
+    emoji.innerText = '🎉';
+    const rect = button.getBoundingClientRect();
+    emoji.style.left = rect.left + rect.width/2 - 10 + 'px';
+    emoji.style.top = rect.top - 20 + 'px';
+    document.body.appendChild(emoji);
+    setTimeout(()=>{ emoji.remove(); }, 1000);
+
+    // Toast ✅
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerText = "✅ Copied to clipboard";
+    document.body.appendChild(toast);
+    setTimeout(()=>{ toast.remove(); }, 1500);
+
+  }).catch(()=>{ alert('Failed to copy'); });
+}
+</script>
+
+</body>
+</html>
